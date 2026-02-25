@@ -1,8 +1,9 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'app/screens/home_dashboard_complete.dart';
 import 'app/screens/alerts_screen_complete.dart';
 import 'app/screens/daily_health_screen_complete.dart';
 import 'app/screens/reports_screen_complete.dart';
+import 'app/screens/onboarding_screen_complete.dart';
 
 void main() {
   runApp(const MatriCareApp());
@@ -14,7 +15,7 @@ class MatriCareApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MatriCare - Baby Pink Theme',
+      title: 'MatriCare',
       theme: ThemeData(
         primaryColor: const Color(0xFFFFB6C1),
         useMaterial3: true,
@@ -33,6 +34,8 @@ class MatriCareHome extends StatefulWidget {
 
 class _MatriCareHomeState extends State<MatriCareHome> {
   int _currentIndex = 0;
+  String _userName = 'Sarah';
+  int _pregnancyWeek = 18;
 
   late final List<Widget> _screens;
 
@@ -41,8 +44,8 @@ class _MatriCareHomeState extends State<MatriCareHome> {
     super.initState();
     _screens = [
       HomeDashboardComplete(
-        userName: 'Sarah',
-        pregnancyWeek: 18,
+        userName: _userName,
+        pregnancyWeek: _pregnancyWeek,
       ),
       const AlertsScreenComplete(),
       const DailyHealthScreenComplete(),
@@ -53,7 +56,7 @@ class _MatriCareHomeState extends State<MatriCareHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: _screens[_currentIndex]),
+      body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
